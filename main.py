@@ -72,7 +72,7 @@ async def commandAnnounce(ctx,arg):
         if len(x.text_channels) > 0:
             try:
                 for y in x.text_channels:
-                    if y.name in allowedChannels:
+                    if y.name in allowed_channels:
                         await y.send(arg)
                     
             except Exception as err:
