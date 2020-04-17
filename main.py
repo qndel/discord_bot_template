@@ -84,6 +84,10 @@ async def commandAnnounce(ctx,arg):
 async def commandHowToAdd(ctx):
     await ctx.send('To add the bot to a discord server, the server admin must visit\n<'+discord.utils.oauth_url(bot.user.id)+'>\nand choose the server.') 
 
+@bot.command(name='info')
+async def commandInfo(ctx):
+    await ctx.send('Created by **Qndel#2237**\n**discord.py**: v'+discord.__version__) 
+    
 @bot.event
 async def on_guild_join(guild):
     await updateStatus()
