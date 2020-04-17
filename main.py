@@ -10,7 +10,7 @@ from discord.ext.commands import has_permissions
 
 ######CONFIG##################
 admins = ["Qndel#2237"]
-allowed_channels = ["sh-bot"]
+allowed_channels = ["bot-channels-names-here"]
 ######END_CONFIG##############
 
 
