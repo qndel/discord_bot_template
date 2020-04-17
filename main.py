@@ -14,7 +14,13 @@ allowed_channels = [""]
 
 
 bot = commands.Bot(command_prefix='!')   
- 
+######################################################################################################USER_COMMANDS####
+#EXAMPLE
+#async def commandHelp(ctx) in helper.py - handle the command there - it will allow you to edit existing commands and reload them dynamically without restarting the bot with !reload command
+#@bot.command(name='test')
+#async def commandHelp(ctx):
+#    helper.commandHelp(ctx)
+######################################################################################################END_USER_COMMANDS
 async def updateStatus():
     activity = discord.Activity(name='Servers: '+str(len(bot.guilds)), type=discord.ActivityType.watching)
     await bot.change_presence(activity=activity)
@@ -56,6 +62,22 @@ async def commandReload(ctx, *, arg=None):
         await ctx.send("Data reloaded.", delete_after=10.0)
     else:
         await ctx.send("Data reloaded.")
+
+@bot.command(name='announce', hidden=True)     
+async def commandAnnounce(ctx,arg):
+    if str(ctx.author) not in admins:
+        await ctx.send("You don't have the permission to do this.")
+        return
+    for x in bot.guilds:
+        if len(x.text_channels) > 0:
+            try:
+                for y in x.text_channels:
+                    if y.name in allowedChannels:
+                        await y.send(arg)
+                    
+            except Exception as err:
+                print("ERROR_ANNOUNCE: "+str(err))
+                pass
 
 @bot.command(name='howtoadd')
 async def commandHowToAdd(ctx):
