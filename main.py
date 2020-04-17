@@ -3,13 +3,14 @@ import sys
 import helper
 import discord
 import asyncio
+import traceback
 import importlib
 from discord.ext import commands
 from discord.ext.commands import has_permissions
 
 ######CONFIG##################
 admins = ["Qndel#2237"]
-allowed_channels = [""]
+allowed_channels = ["sh-bot"]
 ######END_CONFIG##############
 
 
@@ -70,14 +71,14 @@ async def commandAnnounce(ctx,arg):
         return
     for x in bot.guilds:
         if len(x.text_channels) > 0:
-            try:
-                for y in x.text_channels:
-                    if y.name in allowed_channels:
+            for y in x.text_channels:
+                if y.name in allowed_channels:
+                    try:
                         await y.send(arg)
-                    
-            except Exception as err:
-                print("ERROR_ANNOUNCE: "+str(err))
-                pass
+                    except Exception as err:
+                        await ctx.send("Error! Check the log!")
+                        return
+    await ctx.send("Announced successfully.")
 
 @bot.command(name='howtoadd')
 async def commandHowToAdd(ctx):
