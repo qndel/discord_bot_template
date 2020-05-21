@@ -10,7 +10,7 @@ from discord.ext.commands import has_permissions
 init = 1
 ######CONFIG##################
 admins = ["Qndel#2237"]
-allowed_channels = ["bot-channels-names-here"]
+allowed_channels = ["bot-commands"]
 ######END_CONFIG##############
 
 
@@ -50,7 +50,7 @@ async def commandHelp(ctx):
     for y in bot.walk_commands():
         if not y.cog_name and not y.hidden:
             cmdList.append(y.name)
-    await ctx.send('**Commands:**\n> '+("\n> "+bot.command_prefix).join(cmdList)+'\nWrite command without arguments to see more info.')  
+    await ctx.send('**Commands:**\n> '+bot.command_prefix+("\n> "+bot.command_prefix).join(cmdList)+'\nWrite command without arguments to see more info.')  
                  
 @bot.command(name='reload', hidden=True)
 async def commandReload(ctx, *, arg=None):
