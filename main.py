@@ -7,7 +7,7 @@ import traceback
 import importlib
 from discord.ext import commands
 from discord.ext.commands import has_permissions
-
+init = 1
 ######CONFIG##################
 admins = ["Qndel#2237"]
 allowed_channels = ["bot-channels-names-here"]
@@ -98,8 +98,12 @@ async def on_guild_remove(guild):
     
 @bot.event
 async def on_ready():
+    global init
     print('We have logged in as {0.user}'.format(bot))
-    await helper.setBotVariable(bot)
+    if init == 1:
+        #prevent firing this multiple times as on_ready can trigger whenever discord lags or something - would cause unexpected behavior if this place was used to run a script in the background
+        await helper.setBotVariable(bot)
+        init = 0
     await updateStatus()
 
 with open(("token_remote","token_host")[helper.isHost()], 'r') as file:
