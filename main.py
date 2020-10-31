@@ -14,7 +14,10 @@ allowed_channels = ["bot-commands"]
 ######END_CONFIG##############
 
 
-bot = commands.Bot(command_prefix='!')   
+intents = discord.Intents.default()
+intents.presences = True
+intents.members = True
+bot = commands.Bot(command_prefix='!', intents = intents)   
 ######################################################################################################USER_COMMANDS####
 #EXAMPLE
 #async def commandHelp(ctx) in helper.py - handle the command there - it will allow you to edit existing commands and reload them dynamically without restarting the bot with !reload command
